@@ -1,17 +1,20 @@
-import React, { useState } from 'react';
-import { Hexagon, Mail, Lock, ArrowRight, ChevronRight } from 'lucide-react';
-import { LoginPage } from './components/LoginPage';
-import { TemplateSelection } from './components/TemplateSelection';
+import React from 'react';
+import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom';
+import { LandingPage } from './pages/LandingPage';
+import { SignInPage } from './pages/SignInPage';
+import { TemplateSelection } from './pages/TemplateSelection';
 
 function App() {
-  const [isLoggedIn, setIsLoggedIn] = useState(false);
-
-  const handleLogin = async (email: string, password: string) => {
-    // Simulate login
-    setIsLoggedIn(true);
-  };
-
-  return isLoggedIn ? <TemplateSelection /> : <LoginPage onLogin={handleLogin} />;
+  return (
+    <Router>
+      <Routes>
+        <Route path="/" element={<LandingPage />} />
+        <Route path="/signin" element={<SignInPage />} />
+        <Route path="/templates" element={<TemplateSelection />} />
+        <Route path="*" element={<Navigate to="/" replace />} />
+      </Routes>
+    </Router>
+  );
 }
 
 export default App;
